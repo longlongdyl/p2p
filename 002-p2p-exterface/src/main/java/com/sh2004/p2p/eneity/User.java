@@ -1,8 +1,17 @@
 package com.sh2004.p2p.eneity;
 
-import java.util.Date;
+import tk.mybatis.mapper.annotation.NameStyle;
+import tk.mybatis.mapper.code.Style;
 
-public class User {
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Date;
+@Table(name = "u_user")
+@NameStyle(Style.camelhump)
+public class User implements Serializable {
+    private static final long serialVersionUID = 9185484854662084614L;
+    @Id
     private Integer id;
 
     private String phone;

@@ -1,8 +1,18 @@
 package com.sh2004.p2p.eneity;
 
-import java.util.Date;
+import tk.mybatis.mapper.annotation.NameStyle;
+import tk.mybatis.mapper.code.Style;
 
-public class IncomeRecord {
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Date;
+@Table(name = "b_income_record")
+@NameStyle(Style.camelhump)
+public class IncomeRecord implements Serializable {
+
+    private static final long serialVersionUID = 1058588418635264229L;
+    @Id
     private Integer id;
 
     private Integer uid;

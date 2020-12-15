@@ -1,8 +1,17 @@
 package com.sh2004.p2p.eneity;
 
-import java.util.Date;
+import tk.mybatis.mapper.annotation.NameStyle;
+import tk.mybatis.mapper.code.Style;
 
-public class RechargeRecord {
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Date;
+@Table(name = "b_recharge_record")
+@NameStyle(Style.camelhump)
+public class RechargeRecord implements Serializable {
+    private static final long serialVersionUID = 6967459169771997831L;
+    @Id
     private Integer id;
 
     private Integer uid;

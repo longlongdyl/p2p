@@ -1,8 +1,17 @@
 package com.sh2004.p2p.eneity;
 
-import java.util.Date;
+import tk.mybatis.mapper.annotation.NameStyle;
+import tk.mybatis.mapper.code.Style;
 
-public class LoanInfo {
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Date;
+@Table(name = "b_loan_info")
+@NameStyle(Style.camelhump)
+public class LoanInfo implements Serializable {
+    private static final long serialVersionUID = -2341416336452649006L;
+    @Id
     private Integer id;
 
     private String productName;

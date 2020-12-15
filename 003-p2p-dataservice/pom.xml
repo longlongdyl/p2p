@@ -11,4 +11,26 @@
     <artifactId>003-p2p-dataservice</artifactId>
 
     <modelVersion>4.0.0</modelVersion>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.sh2004.p2p</groupId>
+            <artifactId>002-p2p-exterface</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sh2004.p2p</groupId>
+            <artifactId>002-p2p-exterface</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sh2004.p2p</groupId>
+            <artifactId>004-p2p-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 </project>
