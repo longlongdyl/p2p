@@ -1,5 +1,6 @@
 package com.sh2004.p2p.service;
 
+import com.github.pagehelper.PageInfo;
 import com.sh2004.p2p.eneity.LoanInfo;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface LoanInfoService {
     Double queryAvgRate();
 
     List<LoanInfo> queryAllLoanInfo();
+
+    PageInfo<LoanInfo> queryAllSingleLoanInfo(Integer page, Integer pageSize);
 }

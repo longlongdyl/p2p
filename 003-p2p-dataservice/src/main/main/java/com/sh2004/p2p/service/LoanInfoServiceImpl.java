@@ -1,6 +1,8 @@
 package com.sh2004.p2p.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sh2004.p2p.constant.Constant;
 import com.sh2004.p2p.eneity.LoanInfo;
 import com.sh2004.p2p.mapper.LoanInfoMapper;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -51,5 +54,18 @@ public class LoanInfoServiceImpl implements LoanInfoService {
     public List<LoanInfo> queryAllLoanInfo() {
         return loanInfoMapper.selectAll();
     }
+
+    @Override
+    public PageInfo<LoanInfo> queryAllSingleLoanInfo(Integer page, Integer pageSize) {
+        Example example = new Example(LoanInfo.class);
+        example.createCriteria().andEqualTo("productType",2);
+        PageHelper.startPage(page,pageSize);
+        List<LoanInfo> loanInfoList = loanInfoMapper.selectByExample(example);
+        PageInfo<LoanInfo> pageInfo = new PageInfo<>(loanInfoList);
+        return pageInfo;
+    }
+
+
+
 
 }
