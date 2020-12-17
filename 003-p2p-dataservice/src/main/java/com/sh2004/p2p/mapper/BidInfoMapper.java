@@ -4,6 +4,9 @@ import com.sh2004.p2p.eneity.BidInfo;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @ProjectName: p2p
  * @Package: com.sh2004.p2p.mapper
@@ -17,4 +20,7 @@ import tk.mybatis.mapper.common.Mapper;
 @Repository
 public interface BidInfoMapper extends Mapper<BidInfo> {
     Double queryTotalMoney();
+
+    List<Map<String,String>> queryTop5User();
+
 }

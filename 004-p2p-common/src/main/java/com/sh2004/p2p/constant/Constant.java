@@ -15,4 +15,8 @@ public class Constant {
     public static final String AVGRATE = "avgRate";
     public static final String TOTALMONEY = "totalMoney";
 
+    public static final String TOP5USER = "top5User";
+
+
+
 }

@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sh2004.p2p.mapper.BidInfoMapper">
+
     <select id="queryTotalMoney" resultType="double">
-        select SUM(bid_money) from b_income_record
+        select SUM(bid_money) from b_bid_info
     </select>
+
+    <select id="queryTop5User" resultType="map">
+        select b.*,u.phone from b_bid_info b left JOIN
+        u_user u on u.id=b.uid ORDER BY bid_money desc LIMIT 0,5
+    </select>
+
+
+
 </mapper>

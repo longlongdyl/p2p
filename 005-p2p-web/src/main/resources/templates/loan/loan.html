@@ -82,11 +82,10 @@
                 <div class="system-notice" style="margin-top: 0px;">
                     <div class="system-tit"><h3>投资排行榜</h3></div>
                     <ul>
-                        <li><span>1.&nbsp;137******98&nbsp;&nbsp;9000</span></li>
-                        <li><span>2.&nbsp;139******12&nbsp;&nbsp;8000</span></li>
-                        <li><span>3.&nbsp;155******45&nbsp;&nbsp;6000</span></li>
-                        <li><span>4.&nbsp;177******00&nbsp;&nbsp;5500</span></li>
-                        <li><span>5.&nbsp;138******73&nbsp;&nbsp;1000</span></li>
+                        <div th:each="bidInfo:${top5List}">
+                        <li><span th:text="|${bidInfoStat.count}&nbsp;${#strings.replace(bidInfo.get('phone'),
+                        #strings.substring(bidInfo.get('phone'),3,7),'****')}&nbsp;&nbsp;${bidInfo.get('bid_money')}|">1.&nbsp;137******98&nbsp;&nbsp;9000</span></li>
+                        </div>
                     </ul>
                 </div>
                 <!--投资排行榜end-->

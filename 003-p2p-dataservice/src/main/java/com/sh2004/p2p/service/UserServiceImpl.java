@@ -21,10 +21,14 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * Copyright: Copyright (c) 2020
  */
+
+
 @Service(interfaceClass = UserService.class,timeout = 10000,version = "1.0.0")
 @Component
 @Slf4j
 public class UserServiceImpl implements UserService {
+
+
     @Autowired
     private UserMapper userMapper;
     @Autowired

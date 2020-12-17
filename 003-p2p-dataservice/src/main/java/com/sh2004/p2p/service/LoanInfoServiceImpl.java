@@ -61,8 +61,7 @@ public class LoanInfoServiceImpl implements LoanInfoService {
         example.createCriteria().andEqualTo("productType",2);
         PageHelper.startPage(page,pageSize);
         List<LoanInfo> loanInfoList = loanInfoMapper.selectByExample(example);
-        PageInfo<LoanInfo> pageInfo = new PageInfo<>(loanInfoList);
-        return pageInfo;
+        return new PageInfo<>(loanInfoList);
     }
 
 

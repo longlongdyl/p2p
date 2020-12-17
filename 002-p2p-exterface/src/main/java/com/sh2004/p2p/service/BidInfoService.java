@@ -1,5 +1,10 @@
 package com.sh2004.p2p.service;
 
+import com.sh2004.p2p.eneity.BidInfo;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * @ProjectName: p2p
  * @Package: com.sh2004.p2p.service
@@ -12,4 +17,6 @@ package com.sh2004.p2p.service;
  */
 public interface BidInfoService {
     Double queryTotalMoney();
+
+    List<Map<String,String>> queryTop5User();
 }
