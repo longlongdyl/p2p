@@ -2,7 +2,9 @@ package com.sh2004.p2p.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.sh2004.p2p.constant.Constant;
+import com.sh2004.p2p.eneity.FinanceAccount;
 import com.sh2004.p2p.eneity.User;
+import com.sh2004.p2p.mapper.FinanceAccountMapper;
 import com.sh2004.p2p.mapper.UserMapper;
 import com.sh2004.p2p.result.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +42,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     RedisTemplate<Object,Object> redisTemplate;
+    @Autowired
+    private FinanceAccountMapper financeAccountMapper;
 
 
     @Override
@@ -82,6 +86,15 @@ public class UserServiceImpl implements UserService {
             user.setLoginPassword(loginPassword);
             user.setAddTime(new Date());
             userMapper.insertSelective(user);
+            example= new Example(User.class);
+            example.createCriteria().andEqualTo
+                    ("phone",user.getPhone()).
+                    andEqualTo("loginPassword",user.getLoginPassword());
+            User newUser = userMapper.selectOneByExample(example);
+            FinanceAccount financeAccount = new FinanceAccount();
+            financeAccount.setUid(newUser.getId());
+            financeAccount.setAvailableMoney(888D);
+            financeAccountMapper.insertSelective(financeAccount);
             return i;
         }
     }
