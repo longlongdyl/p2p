@@ -1,4 +1,4 @@
-var referrer = "";//登录后返回页面
+/*var referrer = "";//登录后返回页面
 referrer = document.referrer;
 if (!referrer) {
 	try {
@@ -8,11 +8,16 @@ if (!referrer) {
 		}  
 	} catch (e) {
 	}
-}
+}*/
 
-//按键盘Enter键即可登录
+/*//按键盘Enter键即可登录
 $(document).keyup(function(event){
 	if(event.keyCode == 13){
 		login();
 	}
-});
+});*/
+
+	function login() {
+		var login = $('#form').serialize();
+		location.href="/login?user="+login;
+	}

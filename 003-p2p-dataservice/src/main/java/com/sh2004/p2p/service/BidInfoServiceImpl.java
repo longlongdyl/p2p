@@ -3,6 +3,7 @@ package com.sh2004.p2p.service;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.sh2004.p2p.constant.Constant;
 import com.sh2004.p2p.eneity.BidInfo;
+import com.sh2004.p2p.eneity.IncomeRecord;
 import com.sh2004.p2p.mapper.BidInfoMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ import java.util.concurrent.TimeUnit;
 public class BidInfoServiceImpl implements BidInfoService {
     @Autowired
     private BidInfoMapper bidInfoMapper;
+
     @Autowired
     RedisTemplate<Object,Object> redisTemplate;
 
@@ -54,5 +56,15 @@ public class BidInfoServiceImpl implements BidInfoService {
     public List<Map<String,String>> queryTop5User() {
         return bidInfoMapper.queryTop5User();
 
+    }
+
+    @Override
+    public List<Map<String,String>> selectByUserId(Integer id) {
+        return bidInfoMapper.selectByUserId(id);
+    }
+
+    @Override
+    public List<BidInfo> selectByLoanId(Integer id) {
+        return bidInfoMapper.selectByLoanId(id);
     }
 }

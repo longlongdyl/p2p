@@ -10,7 +10,22 @@
         select b.*,u.phone from b_bid_info b left JOIN
         u_user u on u.id=b.uid ORDER BY bid_money desc LIMIT 0,5
     </select>
+    <select id="selectByUserId" resultType="java.util.Map">
+    select b.*,l.product_name loanName from
+     b_bid_info b left JOIN  b_loan_info l  on b.loan_id=l.id where uid=#{id}
+    </select>
+    <select id="selectByLoanId" resultMap="BidInfoByLoanId">
+      SELECT b.*,u.phone  from b_bid_info b left join u_user u on u.id=b.uid where b.loan_id=#{id}
+    </select>
 
-
+    <resultMap id="BidInfoByLoanId" type="com.sh2004.p2p.eneity.BidInfo" autoMapping="true">
+        <id property="id" column="id" />
+        <result property="bidMoney" column="bid_money" />
+        <result property="bidTime" column="bid_time" />
+        <association property="user" javaType="com.sh2004.p2p.eneity.User" autoMapping="true">
+        <id property="id" column="uid" />
+        <result property="phone" column="phone" />
+        </association>
+    </resultMap>
 
 </mapper>

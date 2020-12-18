@@ -2,13 +2,20 @@ package com.sh2004.p2p.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.sh2004.p2p.constant.Constant;
+import com.sh2004.p2p.eneity.User;
 import com.sh2004.p2p.mapper.UserMapper;
+import com.sh2004.p2p.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
+import tk.mybatis.mapper.entity.Example;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -49,5 +56,33 @@ public class UserServiceImpl implements UserService {
             }
         }
         return userCount;
+    }
+
+    @Override
+    public List<User> Login(User user) {
+        Example example= new Example(User.class);
+        example.createCriteria().andEqualTo
+                ("phone",user.getPhone()).
+                andEqualTo("loginPassword",user.getLoginPassword());
+        List<User> users = userMapper.selectByExample(example);
+        return users;
+
+    }
+
+    @Override
+    public int insertUser(String phone, String loginPassword) {
+        Example example = new Example(User.class);
+        example.createCriteria().andEqualTo("phone",phone);
+        int i = userMapper.selectCountByExample(example);
+        if (i!=0){
+            return i;
+        }else {
+            User user = new User();
+            user.setPhone(phone);
+            user.setLoginPassword(loginPassword);
+            user.setAddTime(new Date());
+            userMapper.insertSelective(user);
+            return i;
+        }
     }
 }

@@ -36,10 +36,19 @@
         <div class="register-bg"></div>
         <!-- 未登录状态 -->
         <div class="register">
-            <h3 >动力金融网历史年化收益率</h3>
-            <h4><span id="avg" th:text="${#numbers.formatDecimal(avgRate,0,2)}">13.8</span> %</h4>
-            <div class="bn_register"><a th:href="@{/loan/page/register}" class="btn-1">注册领888大红包</a></div>
-            <div class="login">有账号? <a th:href="@{/loan/page/login}">立即登录</a></div>
+            <div th:if="${session.user != null}">
+                <div class="register welcome">
+                    <div class="welcome-txt">欢迎 <span>“<b th:text="${session.user.name}">张三</b>”</span><br/>来动力金融网投资！</div>
+                    <div class="bn_register"><a href="/myCenter" class="btn-1">进入我的小金库</a></div>
+                </div>
+            </div>
+            <div th:if="${session.user == null}">
+                <h3 >动力金融网历史年化收益率</h3>
+                <h4><span id="avg" th:text="${#numbers.formatDecimal(avgRate,0,2)}">13.8</span> %</h4>
+                <div class="bn_register"><a href="/register" class="btn-1">注册领888大红包</a></div>
+                <div class="login">有账号? <a href="/login">立即登录</a></div>
+            </div>
+
         </div>
         <!-- 登录状态
         <div class="register welcome">
@@ -109,7 +118,7 @@
                                 <p class="text2">剩余可投金额</p>
                             </li>
                             <li class="box4">
-                                <a th:href="@{/loan/loanInfo}" class="go-invest">立即投资</a>
+                                <a th:href="@{'/loan/loanInfo?id='+${loanInfo.id}}" class="go-invest">立即投资</a>
                             </li>
                         </ul>
                     </div>
@@ -152,7 +161,7 @@
                         </div>
                         <div class="pro-intr"><p>优选计划项目，投资回报周期1个月，起点低，适合短期资金周转、对流动性要求高的投资人。</p></div>
                         <div class="pro-btn">
-                            <a th:href="@{/loan/loanInfo}" class="btn-1">立即投资</a>
+                            <a th:href="@{'/loan/loanInfo?id='+${loanInfo.id}}" class="btn-1">立即投资</a>
                         </div>
                     </div>
                 </div>
@@ -191,7 +200,7 @@
                             </div>
                         </div>
                         <div class="pro-btn">
-                            <a th:href="@{/loan/loanInfo}" class="btn-1">立即投资</a>
+                            <a th:href="@{'/loan/loanInfo?id='+${loanInfo.id}}" class="btn-1">立即投资</a>
                         </div>
                     </div>
                 </div>
@@ -328,6 +337,7 @@
         //初始化轮播图
         slideSwitch();
     }
+
 </script>
 <script type="text/javascript" src="js/scroll.1.3.js"></script>
 </body>

@@ -23,4 +23,7 @@ public interface BidInfoMapper extends Mapper<BidInfo> {
 
     List<Map<String,String>> queryTop5User();
 
+    List<Map<String, String>> selectByUserId(Integer id);
+
+    List<BidInfo> selectByLoanId(Integer id);
 }

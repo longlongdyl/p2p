@@ -14,6 +14,20 @@ public class BidInfo implements Serializable {
     @Id
     private Integer id;
 
+    private User user;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     private Integer loanId;
 
     private Integer uid;

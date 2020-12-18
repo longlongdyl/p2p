@@ -28,7 +28,7 @@ import java.util.Map;
  * Copyright: Copyright (c) 2020
  */
 @Controller
-public class IndexController {
+public class IndexController  {
 
     @Reference(interfaceClass = LoanInfoService.class, version = "1.0.0", timeout = 15000)
     private LoanInfoService loanInfoService;

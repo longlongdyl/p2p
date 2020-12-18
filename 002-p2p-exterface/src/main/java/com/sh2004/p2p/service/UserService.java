@@ -1,5 +1,9 @@
 package com.sh2004.p2p.service;
 
+import com.sh2004.p2p.eneity.User;
+
+import java.util.List;
+
 /**
  * @ProjectName: p2p
  * @Package: com.sh2004.p2p.service
@@ -12,4 +16,8 @@ package com.sh2004.p2p.service;
  */
 public interface UserService {
     Long queryUserCount();
+
+    List<User> Login(User user);
+
+    int insertUser(String phone, String loginPassword);
 }

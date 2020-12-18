@@ -1,8 +1,8 @@
 package com.sh2004.p2p.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.sh2004.p2p.eneity.RechargeRecord;
-import com.sh2004.p2p.mapper.RechargeRecordMapper;
+import com.sh2004.p2p.eneity.IncomeRecord;
+import com.sh2004.p2p.mapper.IncomeRecordMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,21 +15,23 @@ import java.util.List;
  * @Package: com.sh2004.p2p.service
  * @Description: java类作用描述
  * @Author: 邓禹龙
- * @CreateDate: 2020/12/16 13:52
+ * @CreateDate: 2020/12/17 19:06
  * @Version: 1.0
  * <p>
  * Copyright: Copyright (c) 2020
  */
-@Service(interfaceClass = RechargeRecordService.class,timeout = 10000,version = "1.0.0")
+@Service(interfaceClass = IncomeRecordService.class,timeout = 10000,version = "1.0.0")
 @Component
 @Slf4j
-public class RechargeRecordServiceImpl implements RechargeRecordService {
+public class IncomeRecordServiceImpl implements IncomeRecordService {
     @Autowired
-    private RechargeRecordMapper rechargeRecordMapper;
+    private IncomeRecordMapper incomeRecordMapper;
+
+
     @Override
-    public List<RechargeRecord> selectByUserId(Integer id) {
-        Example example = new Example(RechargeRecord.class);
+    public List<IncomeRecord> selectByUserId(Integer id) {
+        Example example = new Example(IncomeRecord.class);
         example.createCriteria().andEqualTo("uid",id);
-        return rechargeRecordMapper.selectByExample(example);
+        return incomeRecordMapper.selectByExample(example);
     }
 }

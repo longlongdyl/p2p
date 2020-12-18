@@ -19,4 +19,8 @@ public interface BidInfoService {
     Double queryTotalMoney();
 
     List<Map<String,String>> queryTop5User();
+
+    List<Map<String,String>> selectByUserId(Integer id);
+
+    List<BidInfo> selectByLoanId(Integer id);
 }

@@ -21,4 +21,6 @@ public interface LoanInfoService {
     List<LoanInfo> queryAllLoanInfo();
 
     PageInfo<LoanInfo> queryAllSingleLoanInfo(Integer page, Integer pageSize);
+
+    LoanInfo selectByLoanId(Integer id);
 }

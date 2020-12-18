@@ -1,5 +1,9 @@
 package com.sh2004.p2p.service;
 
+import com.sh2004.p2p.eneity.RechargeRecord;
+
+import java.util.List;
+
 /**
  * @ProjectName: p2p
  * @Package: com.sh2004.p2p.service
@@ -11,4 +15,5 @@ package com.sh2004.p2p.service;
  * Copyright: Copyright (c) 2020
  */
 public interface RechargeRecordService {
+    List<RechargeRecord> selectByUserId(Integer id);
 }

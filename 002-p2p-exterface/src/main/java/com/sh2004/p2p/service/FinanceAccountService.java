@@ -11,4 +11,5 @@ package com.sh2004.p2p.service;
  * Copyright: Copyright (c) 2020
  */
 public interface FinanceAccountService {
+    Double selectByUserId(Integer id);
 }

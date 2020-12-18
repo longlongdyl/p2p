@@ -1,6 +1,6 @@
 package com.sh2004.p2p.mapper;
 
-import com.sh2004.p2p.eneity.RechargeRecord;
+import com.sh2004.p2p.eneity.FinanceAccount;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -9,11 +9,11 @@ import tk.mybatis.mapper.common.Mapper;
  * @Package: com.sh2004.p2p.mapper
  * @Description: java类作用描述
  * @Author: 邓禹龙
- * @CreateDate: 2020/12/16 13:52
+ * @CreateDate: 2020/12/17 21:46
  * @Version: 1.0
  * <p>
  * Copyright: Copyright (c) 2020
  */
 @Repository
-public interface RechargeRecordMapper extends Mapper<RechargeRecord> {
+public interface FinanceAccountMapper extends Mapper<FinanceAccount> {
 }

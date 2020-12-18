@@ -64,7 +64,10 @@ public class LoanInfoServiceImpl implements LoanInfoService {
         return new PageInfo<>(loanInfoList);
     }
 
-
+    @Override
+    public LoanInfo selectByLoanId(Integer id) {
+        return loanInfoMapper.selectByPrimaryKey(id);
+    }
 
 
 }
