@@ -35,7 +35,7 @@
           <ul class="clearfix">
             <li class="info-1">
               <p>历史年化利率</p>
-              <h3 th:text="${loanInfo.rate}"> >4.9%</h3>
+              <h3 th:text="|${loanInfo.rate}%|"> >4.9%</h3>
               <div class="info-bt">
               <span>本产品采用普通利率</span>
               </div>
@@ -111,18 +111,20 @@
           <dl class="usable">
             <dt>我的账户可用</dt>
             <dd>资金(元)：
-            
+
+                  <div th:if="${session.user == null}">
 	            	<!-- 判断用户是否登录：未登录，显示登录连接 -->
 	            	<span style="font-size:18px;color:#ff6161;vertical-align:bottom;"><a th:href="@{/loan/page/login}">请登录</a></span>
-	        
+                  </div>
 	            	<!-- 判断用户是否登录：已登录，显示可用余额 -->
-	           		<!--<span style="font-size:18px;color:#ff6161;vertical-align:bottom;">1,000,12 元</span>-->
-	        
+              <div th:if="${session.user != null}">
+	           		<span style="font-size:18px;color:#ff6161;vertical-align:bottom;" th:text="${session.user.financeAccount.availableMoney}">1,000,12 元</span>
+              </div>
             </dd>
           </dl>
           <div class="expect-box">
-            <div class="expect-money">预计本息收入(元)：<span id="shouyi" class="money"></span><span class="prompt" style="display:block;">请在下方输入投资金额</span></div>
-            <input type="text" id="bidMoney" name="bidMoney" onblur="checkMoney();" placeholder="请输入投资金额，应为100元的整倍数" maxlength="9"/>
+            <div class="expect-money">预计本息收入(元)：<span id="shouyi" class="money"></span><span class="prompt" style="display:block;" id="down">请在下方输入投资金额</span></div>
+            <input type="text" id="bidMoney" name="bidMoney" onblur="checkMoney($(this).val());" placeholder="请输入投资金额，应为100元的整倍数" maxlength="9"/>
             <div class="max-invest-money"></div>
           </div>
           <div class="invest-btn">
@@ -154,11 +156,26 @@
 <jsp:include page="commons/footer.jsp"/>
 <!--页脚end-->
 
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 function closeit() {
 	$("#failurePayment").hide();
 	$("#dialog-overlay1").hide();
 	window.location.href="${pageContext.request.contextPath}/loan/myCenter";
+}
+
+function checkMoney(money) {
+   var xx  = money *[[${loanInfo.rate}]]/100 /12 * [[${loanInfo.cycle}]] + parseInt(money);
+
+   $('#down').html(xx)
+}
+
+function invest() {
+  var money = $('#bidMoney').val()
+  if (confirm("确认投资此项目"+money+"元?")){
+      $.ajax({
+  //      url:'/investLoan?money='+money+'&id=',
+      })
+  }
 }
 </script>
 </body>

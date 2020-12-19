@@ -14,6 +14,20 @@ public class User implements Serializable {
     @Id
     private Integer id;
 
+    private FinanceAccount financeAccount;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public FinanceAccount getFinanceAccount() {
+        return financeAccount;
+    }
+
+    public void setFinanceAccount(FinanceAccount financeAccount) {
+        this.financeAccount = financeAccount;
+    }
+
     private String phone;
 
     private String loginPassword;
@@ -27,6 +41,8 @@ public class User implements Serializable {
     private Date lastLoginTime;
 
     private String headerImage;
+
+
 
     public Integer getId() {
         return id;

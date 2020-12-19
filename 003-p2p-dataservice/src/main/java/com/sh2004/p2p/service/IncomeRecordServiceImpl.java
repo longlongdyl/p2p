@@ -3,6 +3,7 @@ package com.sh2004.p2p.service;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.sh2004.p2p.eneity.IncomeRecord;
 import com.sh2004.p2p.mapper.IncomeRecordMapper;
+import com.sh2004.p2p.mapper.LoanInfoMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,10 +29,10 @@ public class IncomeRecordServiceImpl implements IncomeRecordService {
     private IncomeRecordMapper incomeRecordMapper;
 
 
+
     @Override
     public List<IncomeRecord> selectByUserId(Integer id) {
-        Example example = new Example(IncomeRecord.class);
-        example.createCriteria().andEqualTo("uid",id);
-        return incomeRecordMapper.selectByExample(example);
+
+        return incomeRecordMapper.selectByUserId(id);
     }
 }

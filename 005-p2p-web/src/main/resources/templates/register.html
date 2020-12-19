@@ -28,6 +28,7 @@
             cursor: default;
         }
     </style>
+
 </head>
 
 <body>
@@ -55,7 +56,7 @@
 
                         <div class="login-box clearfix" style="z-index:100;">
                             <label>手机号</label>
-                            <input type="text" id="phone" name="phone" class="input_text" maxlength="11"
+                            <input type="text" id="phone"  name="phone" class="input_text" maxlength="11"
                                    placeholder="请输入11位手机号码" autocomplete="off"/>
                             <span id="phoneOk" class="ok" style="display:none;"></span>
                             <div id="phoneErr" class="form-hint" style="display:none;"></div>
@@ -69,16 +70,16 @@
                             <div id="loginPasswordErr" class="form-hint" style="display:none;z-index:90;"></div>
                         </div>
 
-                        <!--  <div class="login-box clearfix" style="z-index:60;">
+                          <div class="login-box clearfix" style="z-index:60;">
                               <label>&nbsp;</label>
                               <div class="yzm-box">
-                                  <input id="messageCode" type="text" class="yzm" placeholder="获取短信验证码"/>
+                                  <input id="messageCode" onblur="mesblur()" type="text" class="yzm" placeholder="获取短信验证码"/>
                                   &nbsp;&nbsp;
-                                  <button type="button" class="testBtn-a" id="messageCodeBtn">获取验证码</button>
+                                  <button type="button" style="width: 90px;height: 40px;background:#87CEFA;font-size: 12px"   id="code" onclick="sendMessage()">获取验证码</button>
                               </div>
                               <span id="messageCodeOk" class="ok" style="display:none;"></span>
                               <div id="messageCodeErr" class="form-hint" style="display:none;"></div>
-                          </div>-->
+                          </div>
 
                         <div class="remember" style="z-index:60;">
                 <span class="on">
@@ -92,6 +93,7 @@
                             <button class="fail" id="btnRegist" disabled>
                                 注&nbsp;&nbsp;册
                             </button>
+
                         </div>
 
                     </div>

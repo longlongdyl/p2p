@@ -17,7 +17,7 @@ import java.util.List;
 public interface UserService {
     Long queryUserCount();
 
-    List<User> Login(User user);
+    User Login(User user);
 
-    int insertUser(String phone, String loginPassword);
+    String insertUser(String phone, String loginPassword);
 }

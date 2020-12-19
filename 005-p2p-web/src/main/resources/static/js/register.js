@@ -46,10 +46,11 @@ $(function() {
 		}
 	});
 });
-
+var loginPasswordFlag = false;
+var phoneFlag = false;
+var messageCode = false;
 $(function () {
-	var loginPasswordFlag = false;
-	var phoneFlag = false;
+
 	$('#phone').blur(function () {
 		var phone=$('#phone').val();
 		if (phone==null || phone == ""){
@@ -80,7 +81,7 @@ $(function () {
 
 
 	$('#btnRegist').click(function () {
-		if (loginPasswordFlag==true && phoneFlag==true){
+		if (loginPasswordFlag==true && phoneFlag==true && messageCode==true){
 			$.ajax({
 				url:'/userRegister',
 				data:{phone:$('#phone').val(),
@@ -104,4 +105,57 @@ $(function () {
 			})
 		}
 	})
+
+	});
+
+
+function sendMessage() {
+	if (loginPasswordFlag==true && phoneFlag==true ) {
+		var code = $("#code");
+		code.attr("disabled", "true");
+		setTimeout(function () {
+			code.css("opacity", "0.8");
+		}, 1000)
+		var time = 10;
+		var set = setInterval(function () {
+			code.html(--time + "秒后重新获取");
+		}, 1000);
+		setTimeout(function () {
+			code.attr("disabled", false).html("重新获取验证码");
+			clearInterval(set);
+		}, 10000);
+	}
+}
+
+$("#123").blur(function () {
+	alert(123)
+	$.ajax({
+		url:'/registerCode',
+		type:'post',
+		data:{'code':$("#code").val(),'phone':$('#phone').val()},
+		success : function (data) {
+			if (data.eq('1')){
+				showSuccess('messageCode');
+				messageCode = true
+			} else{
+				alert('验证码错误');
+				showError('messageCode')
+			}
+		}
+	})
 });
+function mesblur() {
+	$.ajax({
+		url:'/registerCode',
+		type:'post',
+		data:{'code':$("#messageCode").val(),'phone':$('#phone').val()},
+		success : function (data) {
+			if (data=="1"){
+				showSuccess('messageCode');
+				messageCode = true
+			} else{
+				showError('messageCode','验证码错误')
+			}
+		}
+	})
+}

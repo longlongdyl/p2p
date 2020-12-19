@@ -4,6 +4,8 @@ import com.sh2004.p2p.eneity.User;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.List;
+
 /**
  * @ProjectName: p2p
  * @Package: com.sh2004.p2p.mapper
@@ -18,4 +20,6 @@ import tk.mybatis.mapper.common.Mapper;
 public interface UserMapper extends Mapper<User> {
 
     Long queryUserCount();
+
+    User queryLoginUser(User user);
 }

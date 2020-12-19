@@ -8,6 +8,20 @@
         <version>1.0.0</version>
         <relativePath>../001-p2p-parent/pom.xml</relativePath>
     </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.74</version>
+        </dependency>
+    </dependencies>
     <artifactId>004-p2p-common</artifactId>
     <modelVersion>4.0.0</modelVersion>
 </project>

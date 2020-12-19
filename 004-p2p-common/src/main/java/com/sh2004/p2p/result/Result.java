@@ -32,6 +32,8 @@ public class Result implements Serializable {
         this.data = data;
     }
 
+
+
     /**
      * 响应成功(带返回数据)
      * @param data 返回数据

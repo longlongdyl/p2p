@@ -29,6 +29,20 @@ public class IncomeRecord implements Serializable {
 
     private Integer incomeStatus;
 
+    private LoanInfo loanInfo;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public LoanInfo getLoanInfo() {
+        return loanInfo;
+    }
+
+    public void setLoanInfo(LoanInfo loanInfo) {
+        this.loanInfo = loanInfo;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -4,4 +4,22 @@
     <select id="queryUserCount" resultType="long">
         select count(*) from u_user
     </select>
+
+    <resultMap id="LoginUser" type="com.sh2004.p2p.eneity.User" autoMapping="true">
+        <id property="id" column="id" />
+        <result property="phone" column="phone" />
+        <result property="addTime" column="add_time"/>
+        <result property="lastLoginTime" column="last_login_time"/>
+        <result property="name" column="name"/>
+        <association property="financeAccount" javaType="com.sh2004.p2p.eneity.FinanceAccount">
+           <result property="availableMoney" column="available_money" />
+        </association>
+    </resultMap>
+
+
+    <select id="queryLoginUser" resultMap="LoginUser">
+        SELECT u.*,f.available_money from u_user u left join u_finance_account f
+         on u.id=f.uid where u.phone=#{phone} and u.login_password=#{loginPassword}
+    </select>
+
 </mapper>

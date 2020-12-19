@@ -47,7 +47,6 @@ public class IndexController  {
         model.addAttribute("userCount",userCount);
         Double totalMoney = bidInfoService.queryTotalMoney();
         model.addAttribute("totalMoney",totalMoney);
-
         List<LoanInfo> loanInfoList = loanInfoService.queryAllLoanInfo();
         model.addAttribute("loanInfoList",loanInfoList);
         return "index";

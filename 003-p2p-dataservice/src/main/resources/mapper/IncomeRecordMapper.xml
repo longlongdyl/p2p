@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sh2004.p2p.mapper.IncomeRecordMapper">
+
+
+    <resultMap id="IncomeRecordByLoanId" type="com.sh2004.p2p.eneity.IncomeRecord" autoMapping="true">
+        <id property="id" column="id" />
+        <result property="incomeMoney" column="income_money" />
+        <result property="incomeDate" column="income_date" />
+        <association property="loanInfo" javaType="com.sh2004.p2p.eneity.LoanInfo" autoMapping="true">
+            <result property="productName" column="product_name" />
+        </association>
+    </resultMap>
+    <select id="selectByUserId" resultMap="IncomeRecordByLoanId">
+      select i.*,l.product_name from b_income_record i left join b_loan_info l on i.loan_id=l.id where i.uid=#{id}
+    </select>
+
+</mapper>

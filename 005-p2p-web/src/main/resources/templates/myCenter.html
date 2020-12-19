@@ -118,11 +118,12 @@
                         <span class="profit">收益金额</span>
                     </dt>
                     <dd th:each="ir:${incomeRecord}">
+                        <div th:if="${irStat.count<6}">
                         <span class="number" style="text-align:left;" th:text="${irStat.count}">1</span>
-                        <span class="number" th:text="${ir.loanId}">新手宝</span>
-                        <span class="number name" style="text-align:center;" th:text="${ir.incomeDate}">2017-05-12</span>
+                        <span class="number" th:text="${ir.loanInfo.productName}">新手宝</span>
+                        <span class="number name" style="text-align:center;" th:text="${#dates.format(ir.incomeDate,'yy-MM-dd')}">2017-05-12</span>
                         <span class="profit" th:text="${ir.incomeMoney}">12.6</span>
-
+                        </div>
                     </dd>
                 </dl>
                 <div id="moreRecentIncome" class="more-allinvest">

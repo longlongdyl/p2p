@@ -1,17 +1,17 @@
 package com.sh2004.p2p.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.aliyuncs.CommonResponse;
 import com.sh2004.p2p.eneity.User;
-import com.sh2004.p2p.result.Result;
 import com.sh2004.p2p.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.sh2004.p2p.util.Aliyun;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -33,12 +33,9 @@ public class UserController {
     @RequestMapping("/login")
     public String login(User user, HttpSession session) {
         if (user.getPhone()!=null){
-            List<User> users = userService.Login(user);
-            if (users.size()>0){
-                for (User userRight : users) {
-                    System.out.println(userRight.getLastLoginTime());
-                session.setAttribute("user",userRight);
-                }
+            User loginUser = userService.Login(user);
+            if (loginUser.getId() != null){
+                session.setAttribute("user",loginUser);
                 return "forward:";
             }
         }
@@ -53,14 +50,25 @@ public class UserController {
     @RequestMapping("/userRegister")
     @ResponseBody
     public String userRegister (String phone,String loginPassword){
-        int i = userService.insertUser(phone, loginPassword);
-        if (i!=0){
-            return "手机已经存在";
-        }else {
-            return "注册成功";
-        }
+
+        return userService.insertUser(phone, loginPassword);
     }
 
+    @RequestMapping("/registerCode")
+    @ResponseBody
+    public String registerCode (String code,String phone){
+        System.out.println(code+phone);
+        if (code.equals("123456")){
+            return "1";
+        }
+        return "0";
+    }
+
+    @RequestMapping("/loan/logout")
+    public String logout (HttpSession session){
+        session.removeAttribute("user");
+        return "forward:/index";
+    }
 
 
 }

@@ -63,29 +63,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> Login(User user) {
-        Example example= new Example(User.class);
-        example.createCriteria().andEqualTo
-                ("phone",user.getPhone()).
-                andEqualTo("loginPassword",user.getLoginPassword());
-        List<User> users = userMapper.selectByExample(example);
-        return users;
-
+    public User Login(User user) {
+        return userMapper.queryLoginUser(user);
     }
 
     @Override
-    public int insertUser(String phone, String loginPassword) {
+    public String insertUser(String phone, String loginPassword) {
         Example example = new Example(User.class);
         example.createCriteria().andEqualTo("phone",phone);
         int i = userMapper.selectCountByExample(example);
         if (i!=0){
-            return i;
+            return "手机号码已经存在";
         }else {
             User user = new User();
             user.setPhone(phone);
             user.setLoginPassword(loginPassword);
             user.setAddTime(new Date());
             userMapper.insertSelective(user);
+            //送888大礼包
             example= new Example(User.class);
             example.createCriteria().andEqualTo
                     ("phone",user.getPhone()).
@@ -95,7 +90,7 @@ public class UserServiceImpl implements UserService {
             financeAccount.setUid(newUser.getId());
             financeAccount.setAvailableMoney(888D);
             financeAccountMapper.insertSelective(financeAccount);
-            return i;
+            return "注册成功";
         }
     }
 }
