@@ -12,6 +12,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -32,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 public class BidInfoServiceImpl implements BidInfoService {
     @Autowired
     private BidInfoMapper bidInfoMapper;
+
 
     @Autowired
     RedisTemplate<Object,Object> redisTemplate;
@@ -66,5 +68,17 @@ public class BidInfoServiceImpl implements BidInfoService {
     @Override
     public List<BidInfo> selectByLoanId(Integer id) {
         return bidInfoMapper.selectByLoanId(id);
+    }
+
+    @Override
+    public Integer investLoan(String money, String id, String uid) {
+        BidInfo bidInfo = new BidInfo();
+        bidInfo.setBidMoney(Double.parseDouble(money));
+        bidInfo.setLoanId(Integer.parseInt(id));
+        bidInfo.setUid(Integer.parseInt(uid));
+        bidInfo.setBidTime(new Date());
+        bidInfo.setBidStatus(1);
+        bidInfoMapper.insertSelective(bidInfo);
+        return bidInfo.getId();
     }
 }

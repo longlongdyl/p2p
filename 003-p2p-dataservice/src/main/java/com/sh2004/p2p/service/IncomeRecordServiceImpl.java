@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,5 +35,20 @@ public class IncomeRecordServiceImpl implements IncomeRecordService {
     public List<IncomeRecord> selectByUserId(Integer id) {
 
         return incomeRecordMapper.selectByUserId(id);
+    }
+
+    @Override
+    public void investLoan(Integer bidId ,String money, String id, String uid, String incomeMoney) {
+        IncomeRecord incomeRecord = new IncomeRecord();
+        incomeRecord.setBidId(bidId);
+        incomeRecord.setBidMoney(Double.parseDouble(money));
+        //这个日期有问题,收入日期应该为new date + 收益的月数 比如6个月 以后再改
+        incomeRecord.setIncomeDate(new Date());
+        incomeRecord.setIncomeStatus(0);
+        incomeRecord.setLoanId(Integer.parseInt(id));
+        incomeRecord.setUid(Integer.parseInt(uid));
+        incomeRecord.setIncomeMoney(Double.parseDouble(incomeMoney));
+        incomeRecordMapper.insertSelective(incomeRecord);
+
     }
 }

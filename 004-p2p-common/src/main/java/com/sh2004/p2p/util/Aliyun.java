@@ -21,10 +21,10 @@ import com.aliyuncs.profile.DefaultProfile;
  * Copyright: Copyright (c) 2020
  */
 public class Aliyun {
-    public static CommonResponse code(String phone){
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4G7xHsnGzZeqrX8a44Xw", "ZBOBbeVwUuIOkTfEJsOcattqIL44zK");
+    public static CommonResponse code(String phone,String code){
+        System.out.println(code);
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4GGfg71HX6Gjw7p9C6RD", "SWloTrhx2iNVMLgIttgObTJg0kNTib");
         IAcsClient client = new DefaultAcsClient(profile);
-        long code = Math.round(Math.random()*10000+100000);
         CommonRequest request = new CommonRequest();
         request.setSysMethod(MethodType.POST);
         request.setSysDomain("dysmsapi.aliyuncs.com");

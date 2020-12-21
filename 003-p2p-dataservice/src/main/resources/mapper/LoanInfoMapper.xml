@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sh2004.p2p.mapper.LoanInfoMapper">
+    <update id="investLoan">
+        update b_loan_info set left_product_money = left_product_money - #{money} where id=#{id}
+    </update>
     <select id="queryAvgRate" resultType="double">
         select AVG(rate) from b_loan_info
     </select>

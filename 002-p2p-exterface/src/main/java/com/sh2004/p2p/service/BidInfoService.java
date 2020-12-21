@@ -23,4 +23,6 @@ public interface BidInfoService {
     List<Map<String,String>> selectByUserId(Integer id);
 
     List<BidInfo> selectByLoanId(Integer id);
+
+    Integer investLoan(String money, String id, String uid);
 }

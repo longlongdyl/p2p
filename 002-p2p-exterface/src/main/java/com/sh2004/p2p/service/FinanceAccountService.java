@@ -1,5 +1,9 @@
 package com.sh2004.p2p.service;
 
+import com.sh2004.p2p.eneity.FinanceAccount;
+
+import javax.servlet.http.HttpSession;
+
 /**
  * @ProjectName: p2p
  * @Package: com.sh2004.p2p.service
@@ -12,4 +16,6 @@ package com.sh2004.p2p.service;
  */
 public interface FinanceAccountService {
     Double selectByUserId(Integer id);
+
+    FinanceAccount investLoan(String money, String uid  );
 }

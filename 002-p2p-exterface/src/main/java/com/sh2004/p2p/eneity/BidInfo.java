@@ -3,6 +3,7 @@ package com.sh2004.p2p.eneity;
 import tk.mybatis.mapper.annotation.NameStyle;
 import tk.mybatis.mapper.code.Style;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.util.Date;
 public class BidInfo implements Serializable {
     private static final long serialVersionUID = -2062132515566626438L;
     @Id
+    @GeneratedValue(generator = "JDBC")
     private Integer id;
 
     private User user;

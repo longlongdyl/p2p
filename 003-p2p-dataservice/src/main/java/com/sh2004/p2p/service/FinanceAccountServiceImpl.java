@@ -2,12 +2,14 @@ package com.sh2004.p2p.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.sh2004.p2p.eneity.FinanceAccount;
+import com.sh2004.p2p.eneity.User;
 import com.sh2004.p2p.mapper.FinanceAccountMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -32,5 +34,14 @@ public class FinanceAccountServiceImpl implements FinanceAccountService {
         example.createCriteria().andEqualTo("uid",id);
         FinanceAccount financeAccount = financeAccountMapper.selectOneByExample(example);
         return financeAccount.getAvailableMoney();
+    }
+
+    @Override
+    public FinanceAccount investLoan(String money, String uid ) {
+         financeAccountMapper.investLoan(money,uid);
+         FinanceAccount financeAccount = new FinanceAccount();
+         financeAccount.setUid(Integer.parseInt(uid));
+        FinanceAccount account = financeAccountMapper.selectOne(financeAccount);
+        return account;
     }
 }

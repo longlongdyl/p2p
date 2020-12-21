@@ -1,6 +1,7 @@
 package com.sh2004.p2p.mapper;
 
 import com.sh2004.p2p.eneity.FinanceAccount;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -16,4 +17,5 @@ import tk.mybatis.mapper.common.Mapper;
  */
 @Repository
 public interface FinanceAccountMapper extends Mapper<FinanceAccount> {
+    void investLoan(@Param("money") String money, @Param("uid") String uid);
 }

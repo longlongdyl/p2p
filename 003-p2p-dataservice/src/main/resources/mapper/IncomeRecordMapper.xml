@@ -12,7 +12,8 @@
         </association>
     </resultMap>
     <select id="selectByUserId" resultMap="IncomeRecordByLoanId">
-      select i.*,l.product_name from b_income_record i left join b_loan_info l on i.loan_id=l.id where i.uid=#{id}
+      select i.*,l.product_name from b_income_record i
+      left join b_loan_info l on i.loan_id=l.id where i.uid=#{id} ORDER BY income_date DESC
     </select>
 
 </mapper>

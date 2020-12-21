@@ -30,6 +30,7 @@ public class RechargeRecordServiceImpl implements RechargeRecordService {
     public List<RechargeRecord> selectByUserId(Integer id) {
         Example example = new Example(RechargeRecord.class);
         example.createCriteria().andEqualTo("uid",id);
+        example.setOrderByClause("recharge_time DESC");
         return rechargeRecordMapper.selectByExample(example);
     }
 }

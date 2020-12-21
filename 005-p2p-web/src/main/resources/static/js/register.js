@@ -60,8 +60,22 @@ $(function () {
 			showError("phone","电话号码不合法");
 			phoneFlag = false;
 		}else {
-			showSuccess("phone");
-			phoneFlag = true;
+
+			$.ajax({
+				url:'/userRegister',
+				data:{phone:$('#phone').val()},
+				type:'post',
+				success : function (data) {
+					if (data.indexOf('成功') >=0) {
+						showSuccess("phone");
+						phoneFlag = true;
+					}else {
+						showError("phone",data);
+						$("#loginPasswordOk").hide();
+						loginPasswordFlag = false;
+					}
+				}
+			});
 		}
 
 	});
@@ -91,7 +105,7 @@ $(function () {
 					if (data.indexOf('成功') >0){
 						alert(data);
 						setTimeout(function(){
-							location.href="/login";
+							location.href="/realName";
 							}, 500);
 					}else {
 						$('#phone').val('');
@@ -125,37 +139,31 @@ function sendMessage() {
 			clearInterval(set);
 		}, 10000);
 	}
+	var randomCode = ('000000' + Math.floor(Math.random() * 999999)).slice(-6);
+
+	$.ajax({
+		url:'/registerCode',
+		data:{'randomCode':randomCode,'phone':$('#phone').val()}
+	})
 }
 
-$("#123").blur(function () {
-	alert(123)
-	$.ajax({
-		url:'/registerCode',
-		type:'post',
-		data:{'code':$("#code").val(),'phone':$('#phone').val()},
-		success : function (data) {
-			if (data.eq('1')){
-				showSuccess('messageCode');
-				messageCode = true
-			} else{
-				alert('验证码错误');
-				showError('messageCode')
-			}
-		}
-	})
-});
+
 function mesblur() {
-	$.ajax({
-		url:'/registerCode',
-		type:'post',
-		data:{'code':$("#messageCode").val(),'phone':$('#phone').val()},
-		success : function (data) {
-			if (data=="1"){
-				showSuccess('messageCode');
-				messageCode = true
-			} else{
-				showError('messageCode','验证码错误')
+	if (loginPasswordFlag==true && phoneFlag==true ) {
+		$.ajax({
+			url: '/registerCode',
+			type: 'post',
+			data: {'code': $("#messageCode").val(), 'phone': $('#phone').val()},
+			success: function (data) {
+				if (data == "1") {
+					showSuccess('messageCode');
+					messageCode = true
+				} else if (data == "2") {
+					showError('messageCode', '请先获取验证码')
+				} else {
+					showError('messageCode', '验证码错误')
+				}
 			}
-		}
-	})
+		})
+	}
 }

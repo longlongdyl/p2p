@@ -12,7 +12,7 @@
     </select>
     <select id="selectByUserId" resultType="java.util.Map">
     select b.*,l.product_name loanName from
-     b_bid_info b left JOIN  b_loan_info l  on b.loan_id=l.id where uid=#{id}
+     b_bid_info b left JOIN  b_loan_info l  on b.loan_id=l.id where uid=#{id} order by bid_time desc
     </select>
     <select id="selectByLoanId" resultMap="BidInfoByLoanId">
       SELECT b.*,u.phone  from b_bid_info b left join u_user u on u.id=b.uid where b.loan_id=#{id}

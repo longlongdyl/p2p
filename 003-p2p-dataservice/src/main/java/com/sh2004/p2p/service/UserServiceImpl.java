@@ -74,7 +74,11 @@ public class UserServiceImpl implements UserService {
         int i = userMapper.selectCountByExample(example);
         if (i!=0){
             return "手机号码已经存在";
-        }else {
+        }
+        else {
+            if (null == loginPassword || "".equals(loginPassword)){
+                return "成功";
+            }
             User user = new User();
             user.setPhone(phone);
             user.setLoginPassword(loginPassword);

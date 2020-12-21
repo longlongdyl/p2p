@@ -23,4 +23,6 @@ public interface LoanInfoService {
     PageInfo<LoanInfo> queryAllSingleLoanInfo(Integer page, Integer pageSize);
 
     LoanInfo selectByLoanId(Integer id);
+
+    void investLoan(String id, String money);
 }

@@ -16,4 +16,6 @@ import java.util.List;
  */
 public interface IncomeRecordService {
     List<IncomeRecord> selectByUserId(Integer id);
+
+    void investLoan(Integer bidId ,String money, String id, String uid, String incomeMoney);
 }

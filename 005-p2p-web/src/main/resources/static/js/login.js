@@ -10,10 +10,10 @@ if (!referrer) {
 	}
 }*/
 
-/*//按键盘Enter键即可登录
-$(document).keyup(function(event){
+//按键盘Enter键即可登录
+/*$(document).keyup(function(event){
 	if(event.keyCode == 13){
-		login();
+		$('#loginBtn').click
 	}
 });*/
 
