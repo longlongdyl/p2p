@@ -12,6 +12,10 @@
     <artifactId>002-p2p-exterface</artifactId>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.sh2004.p2p</groupId>
+            <artifactId>004-p2p-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 </project>

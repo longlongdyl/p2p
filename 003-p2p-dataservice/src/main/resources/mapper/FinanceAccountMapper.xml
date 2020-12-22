@@ -3,7 +3,9 @@
 <mapper namespace="com.sh2004.p2p.mapper.FinanceAccountMapper">
 
 
-    <update id="investLoan">
-        UPDATE  u_finance_account set available_money = available_money-#{money} where uid = #{uid};
+    <update id="investLoan"  >
+        UPDATE  u_finance_account set available_money = available_money-#{money}
+         where uid = #{uid} and available_money-#{money}>0;
     </update>
+
 </mapper>

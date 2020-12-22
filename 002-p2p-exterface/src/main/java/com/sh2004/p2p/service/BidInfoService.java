@@ -1,6 +1,7 @@
 package com.sh2004.p2p.service;
 
 import com.sh2004.p2p.eneity.BidInfo;
+import com.sh2004.p2p.result.Result;
 
 import java.util.List;
 import java.util.Map;
@@ -24,5 +25,5 @@ public interface BidInfoService {
 
     List<BidInfo> selectByLoanId(Integer id);
 
-    Integer investLoan(String money, String id, String uid);
+    Result investLoan(String money, String id, String uid ,String incomeMoney);
 }

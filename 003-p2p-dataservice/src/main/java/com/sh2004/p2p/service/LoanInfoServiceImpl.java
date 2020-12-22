@@ -69,10 +69,7 @@ public class LoanInfoServiceImpl implements LoanInfoService {
         return loanInfoMapper.selectByPrimaryKey(id);
     }
 
-    @Override
-    public void investLoan(String id, String money) {
-          loanInfoMapper.investLoan(id,money);
-    }
+
 
 
 }

@@ -165,6 +165,7 @@
 <!--页脚end-->
 
 <script type="text/javascript" th:inline="javascript">
+    var flag = false;
     function closeit() {
         $("#failurePayment").hide();
         $("#dialog-overlay1").hide();
@@ -172,12 +173,19 @@
     }
 
     function checkMoney(money) {
+        if (money >=100&money%100==0) {
         var xx = money * [[${loanInfo.rate}]] / 100 / 12 * [[${loanInfo.cycle}]] + parseInt(money);
         xx = xx.toFixed(2);
         $('#down').html(xx)
+            flag=true;
+        }else {
+            alert('请输入100的整数')
+        }
     }
 
     function invest() {
+        if (flag
+        ) {
         var money = $('#bidMoney').val();
         var incomeMoney = money * [[${loanInfo.rate}]] / 100 / 12 * [[${loanInfo.cycle}]];
         incomeMoney = incomeMoney.toFixed(2);
@@ -192,10 +200,10 @@
                     'incomeMoney': incomeMoney
                 },
                 success: function (data) {
-                    alert('投资成功')
-                    window.location.href="/index";
+                        alert(data.msg)
                 }
             })
+        }
         }
     }
 </script>

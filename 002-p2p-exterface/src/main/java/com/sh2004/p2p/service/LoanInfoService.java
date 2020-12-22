@@ -24,5 +24,5 @@ public interface LoanInfoService {
 
     LoanInfo selectByLoanId(Integer id);
 
-    void investLoan(String id, String money);
+
 }

@@ -19,5 +19,5 @@ import tk.mybatis.mapper.common.Mapper;
 public interface LoanInfoMapper extends Mapper<LoanInfo> {
     Double queryAvgRate();
 
-    void investLoan(@Param("id") String id,@Param("money") String money);
+    int investLoan(@Param("id") String id,@Param("money") String money);
 }

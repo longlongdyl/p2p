@@ -17,5 +17,5 @@ import tk.mybatis.mapper.common.Mapper;
  */
 @Repository
 public interface FinanceAccountMapper extends Mapper<FinanceAccount> {
-    void investLoan(@Param("money") String money, @Param("uid") String uid);
+    int investLoan(@Param("money") String money, @Param("uid") String uid);
 }

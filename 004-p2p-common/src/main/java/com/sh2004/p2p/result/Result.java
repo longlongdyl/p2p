@@ -47,8 +47,8 @@ public class Result implements Serializable {
      * 响应成功
      * @return Result
      */
-    public static Result success(){
-        return new Result(true,2000,"响应成功",null);
+    public static Result success(String msg){
+        return new Result(true,2000,msg,null);
     }
 
     /**
