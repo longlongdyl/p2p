@@ -1,6 +1,5 @@
 package com.sh2004.p2p.test;
 
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @ProjectName: p2p

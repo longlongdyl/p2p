@@ -106,4 +106,19 @@ public class IncomeRecord implements Serializable {
     public void setIncomeStatus(Integer incomeStatus) {
         this.incomeStatus = incomeStatus;
     }
+
+    @Override
+    public String toString() {
+        return "IncomeRecord{" +
+                "id=" + id +
+                ", uid=" + uid +
+                ", loanId=" + loanId +
+                ", bidId=" + bidId +
+                ", bidMoney=" + bidMoney +
+                ", incomeDate=" + incomeDate +
+                ", incomeMoney=" + incomeMoney +
+                ", incomeStatus=" + incomeStatus +
+                ", loanInfo=" + loanInfo +
+                '}';
+    }
 }

@@ -184,8 +184,7 @@
     }
 
     function invest() {
-        if (flag
-        ) {
+        if (flag) {
         var money = $('#bidMoney').val();
         var incomeMoney = money * [[${loanInfo.rate}]] / 100 / 12 * [[${loanInfo.cycle}]];
         incomeMoney = incomeMoney.toFixed(2);
@@ -197,10 +196,12 @@
                     'money': money,
                     'id': [[${loanInfo.id}]],
                     'uid': [[${session.user.id}]],
-                    'incomeMoney': incomeMoney
+                    'incomeMoney': incomeMoney,
+                    'cycle':[[${loanInfo.cycle}]]
                 },
                 success: function (data) {
-                        alert(data.msg)
+                        alert(data.msg);
+                        window.location.href="/myCenter"
                 }
             })
         }

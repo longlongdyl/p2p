@@ -8,6 +8,9 @@
         <version>1.0.0</version>
         <relativePath>../001-p2p-parent/pom.xml</relativePath>
     </parent>
+    <artifactId>004-p2p-common</artifactId>
+    <modelVersion>4.0.0</modelVersion>
+
 
     <dependencies>
         <dependency>
@@ -16,12 +19,37 @@
             <version>4.5.3</version>
         </dependency>
 
+
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.74</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.spring.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
         </dependency>
     </dependencies>
-    <artifactId>004-p2p-common</artifactId>
-    <modelVersion>4.0.0</modelVersion>
+
 </project>

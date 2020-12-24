@@ -66,11 +66,11 @@ $(function () {
 				data:{phone:$('#phone').val()},
 				type:'post',
 				success : function (data) {
-					if (data.indexOf('成功') >=0) {
+					if (data.msg.indexOf('成功') >=0) {
 						showSuccess("phone");
 						phoneFlag = true;
 					}else {
-						showError("phone",data);
+						showError("phone",data.msg);
 						$("#loginPasswordOk").hide();
 						loginPasswordFlag = false;
 					}
@@ -102,15 +102,15 @@ $(function () {
 					loginPassword:$('#loginPassword').val()},
 				type:'post',
 				success : function (data) {
-					if (data.indexOf('成功') >0){
-						alert(data);
+					if (data.msg.indexOf('成功') >0){
+						alert(data.msg);
 						setTimeout(function(){
-							location.href="/realName";
+							location.href="/index";
 							}, 500);
 					}else {
 						$('#phone').val('');
 						$('#loginPassword').val('');
-						showError("phone",data);
+						showError("phone",data.msg);
 						$("#loginPasswordOk").hide();
 						loginPasswordFlag = false;
 					}

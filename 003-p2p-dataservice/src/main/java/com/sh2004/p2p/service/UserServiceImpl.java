@@ -68,16 +68,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String insertUser(String phone, String loginPassword) {
+    public Result insertUser(String phone, String loginPassword) {
+        //查询电话号码是否存在
         Example example = new Example(User.class);
         example.createCriteria().andEqualTo("phone",phone);
         int i = userMapper.selectCountByExample(example);
         if (i!=0){
-            return "手机号码已经存在";
+            return Result.success(Constant.PHONEERROR);
         }
         else {
             if (null == loginPassword || "".equals(loginPassword)){
-                return "成功";
+                return Result.success("成功");
             }
             User user = new User();
             user.setPhone(phone);
@@ -94,7 +95,7 @@ public class UserServiceImpl implements UserService {
             financeAccount.setUid(newUser.getId());
             financeAccount.setAvailableMoney(888D);
             financeAccountMapper.insertSelective(financeAccount);
-            return "注册成功";
+            return Result.success(Constant.REGISTRIGHT) ;
         }
     }
 }

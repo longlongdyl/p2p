@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSONObject;
 import com.aliyuncs.CommonResponse;
 import com.sh2004.p2p.eneity.User;
+import com.sh2004.p2p.result.Result;
 import com.sh2004.p2p.service.UserService;
 import com.sh2004.p2p.util.Aliyun;
 import org.apache.commons.lang3.StringUtils;
@@ -44,7 +45,9 @@ public class UserController {
             if (null != loginUser.getId()) {
                 loginUser.setLastLoginTime(new Date());
                 session.setAttribute("user", loginUser);
+                if (null == url){
                 url = (String) session.getAttribute("backUrl");
+                }
                 System.out.println(url);
                 return "redirect:"+url ;
             }
@@ -60,7 +63,7 @@ public class UserController {
 
     @RequestMapping("/userRegister")
     @ResponseBody
-    public String userRegister(String phone, String loginPassword) {
+    public Result userRegister(String phone, String loginPassword) {
 
         return userService.insertUser(phone, loginPassword);
     }

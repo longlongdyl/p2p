@@ -20,4 +20,7 @@ import java.util.List;
 public interface IncomeRecordMapper extends Mapper<IncomeRecord> {
 
     List<IncomeRecord> selectByUserId(Integer id);
+
+    List<IncomeRecord> selectStatus();
+
 }

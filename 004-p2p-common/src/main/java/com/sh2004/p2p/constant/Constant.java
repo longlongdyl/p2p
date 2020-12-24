@@ -14,8 +14,11 @@ public class Constant {
     public static final String USERCOUNT = "userCount";
     public static final String AVGRATE = "avgRate";
     public static final String TOTALMONEY = "totalMoney";
+    public static final String REGISTRIGHT = "注册成功";
 
     public static final String TOP5USER = "top5User";
+    public static final String PHONEERROR = "手机号码已经存在";
+
 
 
 

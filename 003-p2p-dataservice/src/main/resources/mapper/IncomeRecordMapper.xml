@@ -5,8 +5,13 @@
 
     <resultMap id="IncomeRecordByLoanId" type="com.sh2004.p2p.eneity.IncomeRecord" autoMapping="true">
         <id property="id" column="id" />
-        <result property="incomeMoney" column="income_money" />
+        <result property="uid" column="uid" />
+        <result property="loanId" column="loan_id" />
+        <result property="bidId" column="bid_id" />
+        <result property="bidMoney" column="bid_money" />
         <result property="incomeDate" column="income_date" />
+        <result property="incomeMoney" column="income_money" />
+        <result property="incomeStatus" column="income_status" />
         <association property="loanInfo" javaType="com.sh2004.p2p.eneity.LoanInfo" autoMapping="true">
             <result property="productName" column="product_name" />
         </association>
@@ -14,6 +19,10 @@
     <select id="selectByUserId" resultMap="IncomeRecordByLoanId">
       select i.*,l.product_name from b_income_record i
       left join b_loan_info l on i.loan_id=l.id where i.uid=#{id} ORDER BY income_date DESC
+    </select>
+
+    <select id="selectStatus" resultMap="IncomeRecordByLoanId">
+        SELECT * from b_income_record b where now() > b.income_date and b.income_status = 0
     </select>
 
 </mapper>

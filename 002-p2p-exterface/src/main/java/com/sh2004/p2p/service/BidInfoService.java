@@ -25,5 +25,5 @@ public interface BidInfoService {
 
     List<BidInfo> selectByLoanId(Integer id);
 
-    Result investLoan(String money, String id, String uid ,String incomeMoney);
+    Result investLoan(String money, String id, String uid ,String incomeMoney,String cycle);
 }

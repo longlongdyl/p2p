@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @ProjectName: p2p
@@ -17,12 +19,11 @@ import java.io.IOException;
  * Copyright: Copyright (c) 2020
  */
 public class Test {
-    public static void main(String[] args) throws IOException, ParseException {
-        String json = "{\"RequestId\":\"E770E0A6-5813-4549-9309-5D53C5586B4E\",\"Message\":\"OK\",\"BizId\":\"148402708363234081^0\",\"Code\":\"OK\"}";
-        JSONObject jsonObject = JSONObject.parseObject(json);
-        Object requestId = jsonObject.get("RequestId");
-        System.out.println(requestId);
-
-
+    public static void main(String[] args) {
+        Double money = 1.235546;
+        java.text.DecimalFormat df = new java.text.DecimalFormat("#.00");
+        money = Double.parseDouble(df.format(money));
+        System.out.println(money);
     }
+
 }

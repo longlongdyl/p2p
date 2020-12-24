@@ -52,8 +52,8 @@ public class BidInfoController {
     @RequestMapping("/investLoan")
     @ResponseBody
 
-    public Result investLoan(String money, String id, String uid, String incomeMoney, HttpSession session) {
-        Result result = bidInfoService.investLoan(money, id, uid, incomeMoney);
+    public Result investLoan(String money, String id, String uid, String incomeMoney, HttpSession session,String cycle) {
+        Result result = bidInfoService.investLoan(money, id, uid, incomeMoney,cycle);
         User user = (User) session.getAttribute("user");
         user.getFinanceAccount().setAvailableMoney(financeAccountService.selectByUserId(user.getId()));
         session.setAttribute("user", user);

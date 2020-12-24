@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.sh2004.p2p.constant.Constant;
 import com.sh2004.p2p.eneity.BidInfo;
 import com.sh2004.p2p.eneity.IncomeRecord;
+import com.sh2004.p2p.eneity.LoanInfo;
 import com.sh2004.p2p.mapper.BidInfoMapper;
 import com.sh2004.p2p.mapper.FinanceAccountMapper;
 import com.sh2004.p2p.mapper.IncomeRecordMapper;
@@ -16,8 +17,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import tk.mybatis.mapper.entity.Example;
 
+
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +35,7 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * Copyright: Copyright (c) 2020
  */
-@Service(interfaceClass = BidInfoService.class,timeout = 10000,version = "1.0.0")
+@Service(interfaceClass = BidInfoService.class, timeout = 10000, version = "1.0.0")
 @Component
 @Slf4j
 public class BidInfoServiceImpl implements BidInfoService {
@@ -47,18 +49,18 @@ public class BidInfoServiceImpl implements BidInfoService {
     private LoanInfoMapper loanInfoMapper;
 
     @Autowired
-    RedisTemplate<Object,Object> redisTemplate;
+    RedisTemplate<Object, Object> redisTemplate;
 
     @Override
     public Double queryTotalMoney() {
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         Double totalMoney = (Double) redisTemplate.opsForValue().get(Constant.TOTALMONEY);
-        if (null == totalMoney){
-            synchronized (this){
+        if (null == totalMoney) {
+            synchronized (this) {
                 totalMoney = (Double) redisTemplate.opsForValue().get(Constant.TOTALMONEY);
-                if (null == totalMoney){
+                if (null == totalMoney) {
                     totalMoney = bidInfoMapper.queryTotalMoney();
-                    redisTemplate.opsForValue().set(Constant.TOTALMONEY,totalMoney,30, TimeUnit.SECONDS);
+                    redisTemplate.opsForValue().set(Constant.TOTALMONEY, totalMoney, 30, TimeUnit.SECONDS);
                 }
             }
         }
@@ -66,13 +68,13 @@ public class BidInfoServiceImpl implements BidInfoService {
     }
 
     @Override
-    public List<Map<String,String>> queryTop5User() {
+    public List<Map<String, String>> queryTop5User() {
         return bidInfoMapper.queryTop5User();
 
     }
 
     @Override
-    public List<Map<String,String>> selectByUserId(Integer id) {
+    public List<Map<String, String>> selectByUserId(Integer id) {
         return bidInfoMapper.selectByUserId(id);
     }
 
@@ -83,7 +85,7 @@ public class BidInfoServiceImpl implements BidInfoService {
 
     @Override
     @Transactional
-    public Result investLoan(String money, String id, String uid,String incomeMoney) {
+    public Result investLoan(String money, String id, String uid, String incomeMoney, String cycle) {
         BidInfo bidInfo = new BidInfo();
         bidInfo.setBidMoney(Double.parseDouble(money));
         bidInfo.setLoanId(Integer.parseInt(id));
@@ -93,30 +95,26 @@ public class BidInfoServiceImpl implements BidInfoService {
         bidInfoMapper.insertSelective(bidInfo);
 
 
-
         int i = financeAccountMapper.investLoan(money, uid);
-        if (i==0){
+        if (i == 0) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return Result.error("余额不足");
         }
 
 
-        IncomeRecord incomeRecord = new IncomeRecord();
-        incomeRecord.setBidId(bidInfo.getId());
-        incomeRecord.setBidMoney(Double.parseDouble(money));
-        //这个日期有问题,收入日期应该为new date + 收益的月数 比如6个月 以后再改
-        incomeRecord.setIncomeDate(new Date());
-        incomeRecord.setIncomeStatus(0);
-        incomeRecord.setLoanId(Integer.parseInt(id));
-        incomeRecord.setUid(Integer.parseInt(uid));
-        incomeRecord.setIncomeMoney(Double.parseDouble(incomeMoney));
-        incomeRecordMapper.insertSelective(incomeRecord);
-
         int j = loanInfoMapper.investLoan(id, money);
-        if (j==0){
+        if (j == 0) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return Result.error("该产品余额不足");
         }
-        return Result.success("投资成功");
+        LoanInfo loanInfo = loanInfoMapper.selectByPrimaryKey(Integer.parseInt(id));
+        if (loanInfo.getLeftProductMoney() == 0 && loanInfo.getProductStatus() != 1) {
+            loanInfo.setProductStatus(1);
+            loanInfo.setProductFullTime(new Date());
+            loanInfoMapper.updateByPrimaryKeySelective(loanInfo);
+            return Result.error("投资成功");
+        } else {
+            return Result.success("投资成功");
+        }
     }
 }

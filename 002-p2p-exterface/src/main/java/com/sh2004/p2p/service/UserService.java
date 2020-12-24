@@ -1,6 +1,7 @@
 package com.sh2004.p2p.service;
 
 import com.sh2004.p2p.eneity.User;
+import com.sh2004.p2p.result.Result;
 
 import java.util.List;
 
@@ -19,5 +20,5 @@ public interface UserService {
 
     User Login(User user);
 
-    String insertUser(String phone, String loginPassword);
+    Result insertUser(String phone, String loginPassword);
 }
