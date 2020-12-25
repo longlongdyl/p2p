@@ -22,16 +22,17 @@ public class incomeTime {
 
     @Reference(interfaceClass = IncomeRecordService.class,version = "1.0.0",timeout = 20000)
     IncomeRecordService incomeRecordService;
-
+    //定时器5秒执行一次
     @Scheduled(cron = "0/5 * * * * ?")
     public void generateIncomePlan(){
+        //调用扫描满标订单生成收益计划表单
         incomeRecordService.insertIncomeRecord();
     }
 
-
+    //5秒执行一次
     @Scheduled(cron = "0/5 * * * * ?")
     public void generateIncomeBack(){
-
+        //扫描计划表单,将收益加入用户账户
         incomeRecordService.generateIncomeBack();
 
     }
